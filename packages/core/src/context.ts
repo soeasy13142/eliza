@@ -35,12 +35,6 @@ export const composeContext = ({
     template: string;
     templatingEngine?: "handlebars";
 }) => {
-
-    // Sanitize the template by only allowing specific patterns
-    if (!/^[^{]*{{[\s\w]+}}[^}]*$/.test(template)) {
-        throw new Error("Invalid template format. Only simple variable substitutions are allowed.");
-    }
-
     if (templatingEngine === "handlebars") {
         const templateFunction = handlebars.compile(template);
         return templateFunction(state);
